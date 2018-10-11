@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image: url('img/Grid2.png');
+	background-size: cover;
+}
+
+header {
+	width:100%;
+	height:30%;
+	background-color: green;
+}
+
+section {
+	width:100%;
+	height:70%;
+}
+
+section table {
+	width:100%;
+	border-collapse: collapse;
+}
+
+section table td {
+	overflow: hidden;
+	border: 1px solid blue;
+}
+
+section table td:after {
+	content: '';
+	display: block;
+	margin-top: 100%
+}
