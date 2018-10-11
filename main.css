@@ -10,7 +10,13 @@ body {
 
 header {
 	width: 100%;
-	background-color: green;
+	text-align: center;
+	border-bottom: 1px solid white;
+	padding: 10px;
+}
+
+header button {
+	padding: 5px 10px;
 }
 
 section {
@@ -30,7 +36,8 @@ section table td {
 }
 
 .asteroid {
-	background-color: orange;
+	background-image: url('img/dirt.png');
+	background-size: auto;
 }
 
 .team1 {

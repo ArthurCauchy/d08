@@ -2,7 +2,6 @@
 
 class Map {
     private $_xSize, $_ySize;
-    //private $_entites;
     private $_grid;
 
     public function __construct($kwargs) {
@@ -14,15 +13,19 @@ class Map {
         $this->_ySize = $kwargs["y"];
     }
 
-    public function draw() {
+    public function draw($players) {
         echo "<table>\n";
         for ($i = 0; $i < $this->_ySize; $i++) {
             echo "<tr>\n";
             for ($j = 0; $j < $this->_xSize; $j++) {
                 if ($this->_grid[$i][$j] instanceof Asteroid)
                     echo "<td class=\"asteroid\"></td>\n";
-                else if ($this->_grid[$i][$j] instanceof Ship) // TODO TMP
-                    echo "<td class=\"team1\"></td>\n";
+                else if ($this->_grid[$i][$j] instanceof Ship) {
+                    if (in_array($this->_grid[$i][$j], $players[0]->getUnits())) // TODO foreach on player then get the color directly from the Player instance
+                        echo "<td class=\"team1\"></td>\n";
+                    else
+                        echo "<td class=\"team2\"></td>\n";
+                }
                 else
                     echo "<td></td>\n";
             }
@@ -47,12 +50,61 @@ class Map {
         }
     }
 
-    public function moveEntity($entity, $direction) {
+    private function checkEntityMove($entity, $direction) {
         if ($direction === "left" || $direction === "up") {
             for ($i = 0; $i < $this->_ySize; $i++) {
                 for ($j = 0; $j < $this->_xSize; $j++) {
-                    if ($this->_grid[$i][$j] instanceof $entity) {
-                        if ($j > 0 && $direction === "left") {
+                    if ($this->_grid[$i][$j] === $entity) {
+                        if ($direction === "left") {
+                            if ($j <= 0)
+                                return (FALSE);
+                            if ($this->_grid[$i][$j - 1] !== NULL && $this->_grid[$i][$j - 1] !== $entity)
+                                return ($this->_grid[$i][$j - 1]);
+                        }
+                        if ($direction === "up") {
+                            if ($i <= 0)
+                                return (FALSE);
+                            if ($this->_grid[$i - 1][$j] !== NULL && $this->_grid[$i - 1][$j] !== $entity)
+                                return ($this->_grid[$i - 1][$j]);
+                        }
+                    }
+                }
+            }
+        }
+        else if ($direction === "right" || $direction === "down") {
+            for ($i = $this->_ySize; $i >= 0; $i--) {
+                for ($j = $this->_xSize; $j >= 0; $j--) {
+                    if ($this->_grid[$i][$j] === $entity) {
+                        if ($direction === "right") {
+                            if (!($j < $this->_xSize - 1))
+                                return (FALSE);
+                            if ($this->_grid[$i][$j + 1] !== NULL && $this->_grid[$i][$j + 1] !== $entity)
+                                return ($this->_grid[$i][$j + 1]);
+                        }
+                        if ($direction === "down") {
+                            if (!($i < $this->_ySize - 1))
+                                return (FALSE);
+                            if ($this->_grid[$i + 1][$j] !== NULL && $this->_grid[$i + 1][$j] !== $entity)
+                                return ($this->_grid[$i + 1][$j]);
+                        }
+                    }
+                }
+            }
+        }
+        return (NULL);
+    }
+
+    public function moveEntity($entity, $direction) {
+        $check = $this->checkEntityMove($entity, $direction);
+        if ($check !== NULL)
+            return ($check);
+        if ($direction === "left" || $direction === "up") {
+            for ($i = 0; $i < $this->_ySize; $i++) {
+                for ($j = 0; $j < $this->_xSize; $j++) {
+                    if ($this->_grid[$i][$j] === $entity) {
+                        if ($direction === "left") {
+                            if ($j <= 0)
+                                return (FALSE);
                             if ($this->_grid[$i][$j - 1] === NULL) {
                                 $this->_grid[$i][$j - 1] = $entity;
                                 $this->_grid[$i][$j] = NULL;
@@ -60,7 +112,9 @@ class Map {
                             else
                                 return ($this->_grid[$i][$j - 1]);
                         }
-                        if ($i > 0 && $direction === "up") {
+                        if ($direction === "up") {
+                            if ($i <= 0)
+                                return (FALSE);
                             if ($this->_grid[$i - 1][$j] === NULL) {
                                 $this->_grid[$i - 1][$j] = $entity;
                                 $this->_grid[$i][$j] = NULL;
@@ -73,10 +127,12 @@ class Map {
             }
         }
         else if ($direction === "right" || $direction === "down") {
-            for ($i = $this->_ySize; $i > 0; $i--) {
-                for ($j = $this->_xSize; $j > 0; $j--) {
-                    if ($this->_grid[$i][$j] instanceof $entity) {
-                        if ($j < $this->_xSize && $direction === "right") {
+            for ($i = $this->_ySize; $i >= 0; $i--) {
+                for ($j = $this->_xSize; $j >= 0; $j--) {
+                    if ($this->_grid[$i][$j] === $entity) {
+                        if ($direction === "right") {
+                            if (!($j < $this->_xSize - 1))
+                                return (FALSE);
                             if ($this->_grid[$i][$j + 1] === NULL) {
                                 $this->_grid[$i][$j + 1] = $entity;
                                 $this->_grid[$i][$j] = NULL;
@@ -84,7 +140,9 @@ class Map {
                             else
                                 return ($this->_grid[$i][$j + 1]);
                         }
-                        if ($i < $this->_ySize && $direction === "down") {
+                        if ($direction === "down") {
+                            if (!($i < $this->_ySize - 1))
+                                return (FALSE);
                             if ($this->_grid[$i + 1][$j] === NULL) {
                                 $this->_grid[$i + 1][$j] = $entity;
                                 $this->_grid[$i][$j] = NULL;

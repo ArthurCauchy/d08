@@ -16,6 +16,7 @@ function init() {
     $data['map']->placeEntity(1, 0, 0, 0, $ship1);
     $data['map']->placeEntity(74, 49, 72, 48, $ship2);
     $data['map']->placeEntity(10, 15, 8, 13, $asteroid);
+    $data['map']->placeEntity(35, 18, 25, 8, new Asteroid());
 
     //Add spaceship to player 1
     $data['player1']->addUnit($ship1);
@@ -23,4 +24,3 @@ function init() {
     //Add spaceship to player 2
     $data['player2']->addUnit($ship2);
 }
-?>
