@@ -18,9 +18,9 @@ function init(){
 	$ship2 = new Ship(array('name' => "Evil star", 'size' => NULL, 'SP' => 0, 'HP' => 15, 'PP' => 10, 'MP' => 15));
 
 	// Set Entity position;
-	$map->placeEntityAt(1, 0, 0, 0, $ship1);
-	$map->placeEntityAt(74, 49, 72, 48, $ship2);
-	$map->placeEntityAt(10, 15, 8, 13, $asteroid);
+	$_SESSION['map']->placeEntityAt(1, 0, 0, 0, $ship1);
+	$_SESSION['map']->placeEntityAt(74, 49, 72, 48, $ship2);
+	$_SESSION['map']->placeEntityAt(10, 15, 8, 13, $asteroid);
 
 	//Add spaceship to player 1
 	$_SESSION['player1']->addUnit($ship1);
