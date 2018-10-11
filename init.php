@@ -22,6 +22,11 @@ function init(){
 	$map->placeEntityAt(74, 49, 72, 48, $ship1);
 	$map->placeEntityAt(10, 15, 8, 13, $asteroid);
 
+	//Add spaceship to player 1
+	$_SESSION['player1']->add_unit($ship1);
+
+	//Add spaceship to player 2
+	$_SESSION['player2']->add_unit($ship2);
 
 }
 
