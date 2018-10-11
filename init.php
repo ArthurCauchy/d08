@@ -7,7 +7,7 @@ function init(){
 		return;
 
 	//Init session
-	$_SESSION['on'] = "the war as begun";
+	$_SESSION['on'] = "the war has begun";
 	$_SESSION['map'] = new Map(array ('x' => 75, 'y' => 75));
 	$_SESSION['player1'] = new Player('Le Hero');
 	$_SESSION['player2'] = new Player('Le Mechant');
