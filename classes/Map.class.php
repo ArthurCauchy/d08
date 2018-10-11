@@ -21,10 +21,8 @@ class Map {
             for ($j = 0; $j < $this->_xSize; $j++) {
                 if ($this->_grid[$i][$j] instanceof Asteroid)
                     echo "<td class=\"asteroid\"></td>\n";
-                else if ($this->_grid[$i][$j] instanceof Ship && $this->_grid[$i][$j]->getPlayer() === 1)
+                else if ($this->_grid[$i][$j] instanceof Ship) // TODO TMP
                     echo "<td class=\"team1\"></td>\n";
-                else if ($this->_grid[$i][$j] instanceof Ship && $this->_grid[$i][$j]->getPlayer() === 2)
-                    echo "<td class=\"team2\"></td>\n";
                 else
                     echo "<td></td>\n";
             }
@@ -42,15 +40,9 @@ class Map {
     }
 
     public function placeEntity($x1, $y1, $x2, $y2, $entity) {
-        $filling = FALSE;
-        for ($i = 0; $i < $this->_ySize; $i++) {
-            for ($j = 0; $j < $this->_xSize; $j++) {
-                if ($i == $y1 && $j == $x1)
-                    $filling = TRUE;
-                else if ($i == $y2 && $j == $x2)
-                    return;
-                if ($filling === TRUE)
-                    $this->_grid[$j][$i] = $entity;
+        for ($i = $y2; $i <= $y1; $i++) {
+            for ($j = $x2; $j <= $x1; $j++) {
+                $this->_grid[$i][$j] = $entity;
             }
         }
     }

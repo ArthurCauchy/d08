@@ -5,16 +5,16 @@ class Player
 	private $_units; #units available
 
 	#Player = new Player(array('name' => NAME))
-	public function __construct(array $kwargs)
+	public function __construct($kwargs)
 	{
 		$this->_name = $kwargs['name'];
 		$this->_units = array();
 	}
-	public function addUnit(Ship $ship)
+	public function addUnit($ship)
 	{
 		$this->_units[] = $ship;
 	}
-	public function removeUnit(Ship $remove)
+	public function removeUnit($remove)
 	{
 		$i = 0;
 		while ($i <= count($this->_units))

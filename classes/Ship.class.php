@@ -19,7 +19,7 @@ class Ship extends Entity
 	private $_currMP;
 
 	#Ship = new Ship(array('name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
-	public function __construct(array $kwargs)
+	public function __construct($kwargs)
 	{
 		$this->_name = $kwargs['name'];
 		$this->_size = $kwargs['size'];
@@ -33,12 +33,13 @@ class Ship extends Entity
 		$this->_currSP = $this->_currSP - $dmg;
 		if ($this->_currSP < 0)
 		{
-			$this->_currHP = $this->_currHP - abs($true_dmg);
+			$this->_currHP = $this->_currHP - abs($this->_currSP);
 			$this->_currSP = 0;
 		}
 		if ($this->_currHP < 0)
 			$this->_currHP = 0;
 	}
+
 	public function isDown()
 	{
 		if ($this->_currHP == 0)
