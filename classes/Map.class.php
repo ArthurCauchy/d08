@@ -76,7 +76,7 @@ class Map {
             for ($i = $this->_ySize; $i > 0; $i--) {
                 for ($j = $this->_xSize; $j > 0; $j--) {
                     if ($this->_grid[$i][$j] instanceof $entity) {
-                        if ($j > 0 && $direction === "right") {
+                        if ($j < $this->_xSize && $direction === "right") {
                             if ($this->_grid[$i][$j + 1] === NULL) {
                                 $this->_grid[$i][$j + 1] = $entity;
                                 $this->_grid[$i][$j] = NULL;
@@ -84,7 +84,7 @@ class Map {
                             else
                                 return ($this->_grid[$i][$j + 1]);
                         }
-                        if ($i > 0 && $direction === "down") {
+                        if ($i < $this->_ySize && $direction === "down") {
                             if ($this->_grid[$i + 1][$j] === NULL) {
                                 $this->_grid[$i + 1][$j] = $entity;
                                 $this->_grid[$i][$j] = NULL;
