@@ -19,8 +19,12 @@ class Map {
         for ($i = 0; $i < $this->_ySize; $i++) {
             echo "<tr>\n";
             for ($j = 0; $j < $this->_xSize; $j++) {
-                if ($this->_grid[$i][$j] !== NULL)
+                if ($this->_grid[$i][$j] instanceof Asteroid)
                     echo "<td class=\"asteroid\"></td>\n";
+                else if ($this->_grid[$i][$j] instanceof Ship && $this->_grid[$i][$j]->getPlayer() === 1)
+                    echo "<td class=\"team1\"></td>\n";
+                else if ($this->_grid[$i][$j] instanceof Ship && $this->_grid[$i][$j]->getPlayer() === 2)
+                    echo "<td class=\"team2\"></td>\n";
                 else
                     echo "<td></td>\n";
             }
@@ -29,7 +33,26 @@ class Map {
         echo "</table>\n";
     }
 
+    public function getEntityAt($x, $y) {
+        return ($this->_grid[$y][$x]);
+    }
+
     public function setEntityAt($x, $y, $entity) {
         $this->_grid[$y][$x] = $entity;
+    }
+
+    public function moveEntity($entity, $direction) {
+        for ($i = 0; $i < $this->_ySize; $i++) {
+            for ($j = 0; $j < $this->_xSize; $j++) {
+                if ($this->_grid[$i][$j] instanceof $entity) {
+                    if ($j > 1 && $direction === "left") {
+                        if ($this->_grid[$i][$j - 1] === NULL) {
+                            $this->_grid[$i][$j - 1] = $entity;
+                            $this->_grid[$i][$j] = NULL;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
