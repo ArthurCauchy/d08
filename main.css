@@ -32,5 +32,9 @@ section table td {
 section table td:after {
 	content: '';
 	display: block;
-	margin-top: 100%
+	margin-top: 100%;
+}
+
+.asteroid {
+	background-color: orange;
 }
