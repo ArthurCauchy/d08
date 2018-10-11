@@ -2,8 +2,6 @@
 require_once('Entity.class.php');
 class Ship extends Entity
 {
-	private $_player; #owner of the ship
-
 	private $_name; #ship name
 	private $_size; #ship size [x, y]
 	private $_sprite; #link to sprite
@@ -20,16 +18,33 @@ class Ship extends Entity
 	private $_baseMP; #movement points
 	private $_currMP;
 
-	#Ship = new Ship(array('player' => PLAYER_NAME, 'name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
+	#Ship = new Ship(array('name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
 	public function __construct(array $kwargs)
 	{
-        $this->_player = $kwargs['player'];
 		$this->_name = $kwargs['name'];
 		$this->_size = $kwargs['size'];
 		$this->_baseSP = $kwargs['SP'];
 		$this->_baseHP = $kwargs['HP'];
 		$this->_basePP = $kwargs['PP'];
 		$this->_baseMP = $kwargs['MP'];
+	}
+	public function takeDmg($dmg)
+	{
+		$this->_currSP = $this->_currSP - $dmg;
+		if ($this->_currSP < 0)
+		{
+			$this->_currHP = $this->_currHP - abs($true_dmg);
+			$this->_currSP = 0;
+		}
+		if ($this->_currHP < 0)
+			$this->_currHP = 0;
+	}
+	public function isDown()
+	{
+		if ($this->_currHP == 0)
+			return TRUE;
+		else
+			return FALSE;
 	}
 	public function doc()
 	{
@@ -39,15 +54,6 @@ class Ship extends Entity
 	{
 	
 	}
-
-    /**
-     * @return mixed
-     */
-    public function getPlayer()
-    {
-        return $this->_player;
-    }
-
     /**
      * @param mixed $player
      */

@@ -10,11 +10,11 @@ class Player
 		$this->_name = $kwargs['name'];
 		$this->_units = array();
 	}
-	public function add_unit(Ship $ship)
+	public function addUnit(Ship $ship)
 	{
 		$this->_units[] = $ship;
 	}
-	public function remove_unit(Ship $remove)
+	public function removeUnit(Ship $remove)
 	{
 		$i = 0;
 		while ($i <= count($this->_units))
@@ -24,7 +24,7 @@ class Player
 			$i++;
 		}
 	}
-	public function has_lost()
+	public function hasLost()
 	{
 		if (count($this->_units))
 			return FALSE;
