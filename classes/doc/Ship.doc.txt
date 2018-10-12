@@ -1,1 +1,26 @@
-AMAZING DOC
+
+<- Ship ----------------------------------------------------------------------
+
+This class represents a Ship. It extends Entity class.
+
+============ CONSTRUCTION ============
+
+$vector = new Vector($array);
+
+$array must define the keys :
+- "attr" => description
+
+=========== Public Methods ===========
+
+Static :
+- String doc(); => returns this documentation
+
+Non-static :
+-
+
+========= Getters and Setters ========
+
+Getters :
+- type getMachin();
+
+---------------------------------------------------------------------- Ship ->

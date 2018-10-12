@@ -1,4 +1,5 @@
 <?php
+
 class Sprite {
     private $_imgs;
     private $_count;
@@ -6,6 +7,10 @@ class Sprite {
     public function __construct($imgs) {
         $this->_imgs = $imgs;
         $this->_count = 0;
+    }
+
+    public static function doc() {
+        return (file_get_contents('doc/Sprite.doc.txt'));
     }
 
     public function getIdleSprite() {

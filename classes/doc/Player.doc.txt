@@ -1,1 +1,41 @@
-AMAZING DOC
+
+<- Vector ----------------------------------------------------------------------
+
+This class represents a Vector.
+
+============ CONSTRUCTION ============
+
+$vector = new Vector($array);
+
+$array must define the keys :
+
+========= Public attributes ==========
+
+Static :
+- $verbose (default is false) => Enable/disable verbose output
+
+=========== Public Methods ===========
+
+Static :
+- String doc(); => returns this documentation
+
+Non-static :
+- float magnitude(); => returns the magnitude/length of this vector
+- Vector normalize(); => returns a normalized copy of this vector
+- Vector add(Vector $rhs); => returns the sum of this vector and $rhs
+- Vector sub(Vector $rhs); => returns the subtraction of this vector and $rhs
+- Vector opposite(); => returns the opposite vector of this vector
+- Vector scalarProduct($k); => returns the product of this vector and $k
+- float dotProduct(Vector $rhs); => returns the dot product of this vector and $rhs
+- float cos(Vector $rhs); => returns the cosinus of the angle between this vector and $rhs
+- Vector crossProduct(Vector $rhs); => returns the cross product of this vector and $rhs
+
+========= Getters and Setters ========
+
+Getters :
+- float getX();
+- float getY();
+- float getZ();
+- float getW();
+
+---------------------------------------------------------------------- Vector ->

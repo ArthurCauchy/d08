@@ -2,6 +2,7 @@
 
 function init() {
     global $data;
+
     //Init session
     $data['map'] = new Map(array ('x' => 75, 'y' => 50));
     $data['player1'] = new Player(['name'=>'Player 1 - Le Hero']);

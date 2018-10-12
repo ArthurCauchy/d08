@@ -13,6 +13,10 @@ class Map {
         $this->_ySize = $kwargs["y"];
     }
 
+    public static function doc() {
+        return (file_get_contents('doc/Map.doc.txt'));
+    }
+
     public function draw() {
         echo "<table>\n";
         for ($i = 0; $i < $this->_ySize; $i++) {
@@ -33,8 +37,7 @@ class Map {
         echo "</table>\n";
     }
 
-	private function _shootElem($x, $y, $ship)
-	{
+	private function _shootElem($x, $y, $ship) {
 		$elem = $this->getEntityAt($x, $y);
 		if ($elem instanceof Ship)
 		{
@@ -48,10 +51,9 @@ class Map {
 		return 0;
 	}
 
-    public function registerMissile($ship)
-    {
+    public function registerMissile($ship) {
         $missile = new Missile();
-        $direction = $ship->getDirection(); // TODO set direction;
+        $direction = $ship->getDirection();
         $i = 0;
         $j = 0;
         while ($i <= $this->_ySize)
@@ -129,7 +131,7 @@ class Map {
         }
     }
 
-    private function checkEntityMove($entity, $direction) {
+    private function _checkEntityMove($entity, $direction) {
         if ($direction === "left" || $direction === "up") {
             for ($i = 0; $i < $this->_ySize; $i++) {
                 for ($j = 0; $j < $this->_xSize; $j++) {
@@ -174,7 +176,7 @@ class Map {
     }
 
     public function moveEntity($entity, $direction) {
-        $check = $this->checkEntityMove($entity, $direction);
+        $check = $this->_checkEntityMove($entity, $direction);
         if ($check !== NULL)
             return ($check);
         if ($direction === "left" || $direction === "up") {
