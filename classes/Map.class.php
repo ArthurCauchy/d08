@@ -47,7 +47,7 @@ class Map {
 		{
 			$elem->takeDmg($ship->getDmg());
 			if ($elem->isDown() == TRUE)
-				echo "DOWN";
+				echo "DOWN"; //removeEntity($elem);
 		}
 		return 1;
 	}
@@ -70,7 +70,7 @@ class Map {
 							$out--;
 						for ($j2 = $out; $j2 >= 0; $j2--)
 						{
-							if ($this->getEntityAt($j2, $i))
+							if ($this->getEntityAt($j2, $i) && $this->getEntityAt($j2, $i) != "shot")
 								return $this->_shootElem($j2, $i, $ship);
 							else
 								$this->setEntityAt($j2, $i, "shot");
@@ -84,7 +84,7 @@ class Map {
 							$out++;
 						for ($j2 = $out; $j2 <= $this->_xSize; $j2++)
 						{
-							if ($this->getEntityAt($j2, $i))
+							if ($this->getEntityAt($j2, $i) && $this->getEntityAt($j2, $i) != "shot")
 								return $this->_shootElem($j2, $i, $ship);
 							else
 								$this->setEntityAt($j2, $i, "shot");
