@@ -5,7 +5,7 @@ This class represents a Ship. It extends Entity class.
 
 ============ CONSTRUCTION ============
 
-$vector = new Vector($array);
+$ship = new Ship($array);
 
 $array must define the keys :
 - "dmg" => potential damages of this ship (int)
