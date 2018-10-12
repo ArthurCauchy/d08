@@ -1,18 +1,13 @@
 
-<- Vector ----------------------------------------------------------------------
+<- Player ----------------------------------------------------------------------
 
-This class represents a Vector.
+This class creates a new Player.
 
 ============ CONSTRUCTION ============
 
-$vector = new Vector($array);
+$Player = new Player($array);
 
-$array must define the keys :
-
-========= Public attributes ==========
-
-Static :
-- $verbose (default is false) => Enable/disable verbose output
+$array must define the keys : Name
 
 =========== Public Methods ===========
 
@@ -20,22 +15,10 @@ Static :
 - String doc(); => returns this documentation
 
 Non-static :
-- float magnitude(); => returns the magnitude/length of this vector
-- Vector normalize(); => returns a normalized copy of this vector
-- Vector add(Vector $rhs); => returns the sum of this vector and $rhs
-- Vector sub(Vector $rhs); => returns the subtraction of this vector and $rhs
-- Vector opposite(); => returns the opposite vector of this vector
-- Vector scalarProduct($k); => returns the product of this vector and $k
-- float dotProduct(Vector $rhs); => returns the dot product of this vector and $rhs
-- float cos(Vector $rhs); => returns the cosinus of the angle between this vector and $rhs
-- Vector crossProduct(Vector $rhs); => returns the cross product of this vector and $rhs
+- String getName(); => returns the name of the player
+- String getUnits(); => return units of the player
+- Void addUnit($ship); => add the specified to a player
+- Void removeUnit($remove); => remove the specified ship for the player
+- Bool hasLost(); => returns TRUE if the player has lost the game
 
-========= Getters and Setters ========
-
-Getters :
-- float getX();
-- float getY();
-- float getZ();
-- float getW();
-
----------------------------------------------------------------------- Vector ->
+---------------------------------------------------------------------- Player ->
