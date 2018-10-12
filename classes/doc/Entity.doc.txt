@@ -1,0 +1,10 @@
+<- Entity ----------------------------------------------------------------------
+
+This abstract class represents whatever can be on the map.
+
+=========== Public Methods ===========
+
+Static :
+- String doc(); => returns this documentation
+
+---------------------------------------------------------------------- Entity ->

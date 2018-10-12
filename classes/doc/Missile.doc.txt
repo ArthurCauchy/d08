@@ -1,0 +1,10 @@
+<- Missile ----------------------------------------------------------------------
+
+This abstract class represents a Missile. It extends Entity
+
+=========== Public Methods ===========
+
+Static :
+- String doc(); => returns this documentation
+
+---------------------------------------------------------------------- Missile ->
