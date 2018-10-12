@@ -15,7 +15,7 @@ else
     $data = unserialize($_SESSION['data']);
 
 if (isset($_GET["move"]))
-    $data['map']->moveEntity($data['player2']->getUnits()[0],  $_GET["move"]);
+    $data['map']->moveEntity($data['player1']->getUnits()[0],  $_GET["move"]);
 
 if (isset($_GET["destroy"])) {
     session_destroy();
@@ -23,7 +23,7 @@ if (isset($_GET["destroy"])) {
     exit;
 }
 if (isset($_GET["shoot"])) {
-    $data['map']->shoot($data['player2']->getUnits()[0]);
+    $data['map']->shoot($data['player1']->getUnits()[0]);
 }
 
 if (isset($_GET["unshoot"])) {

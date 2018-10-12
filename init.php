@@ -8,8 +8,8 @@ function init() {
     $data['player2'] = new Player(['name'=>'Le Mechant']);
 
     // Set Entity
-    $ship1 = new Ship(array('name' => "First star", 'size' => NULL, 'SP' => 0, 'HP' => 10, 'PP' => 10, 'MP' => 15));
-    $ship2 = new Ship(array('name' => "Evil star", 'size' => NULL, 'SP' => 0, 'HP' => 15, 'PP' => 10, 'MP' => 15));
+    $ship1 = new Ship(array('dmg' => 5, 'direction' => "right", 'name' => "First star", 'size' => NULL, 'SP' => 0, 'HP' => 10, 'PP' => 10, 'MP' => 15));
+    $ship2 = new Ship(array('dmg' => 8, 'direction' => "left", 'name' => "Evil star", 'size' => NULL, 'SP' => 0, 'HP' => 15, 'PP' => 10, 'MP' => 15));
 
     // Set Entity position;
     $data['map']->placeEntity(1, 0, 0, 0, $ship1);

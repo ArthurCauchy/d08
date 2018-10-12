@@ -21,14 +21,15 @@ class Ship extends Entity
 	private $_baseMP; #movement points
 	private $_currMP;
 
-	#Ship = new Ship(array('name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
+	#Ship = new Ship(array('dmg' => DMG, 'direction' => ORIENTATION, 'name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
 	public function __construct($kwargs)
 	{
-		$this->_dmg = 8;
+		$this->_dmg = $kwargs['dmg'];
+		$this->_direction = $kwargs['direction'];
 		$this->_name = $kwargs['name'];
 		$this->_size = $kwargs['size'];
 		$this->_baseSP = $kwargs['SP'];
-		$this->_baseHP = $kwargs['HP'];
+		$this->_currHP = $this->_baseHP = $kwargs['HP'];
 		$this->_basePP = $kwargs['PP'];
 		$this->_baseMP = $kwargs['MP'];
 	}
@@ -43,7 +44,6 @@ class Ship extends Entity
 		if ($this->_currHP < 0)
 			$this->_currHP = 0;
 	}
-
 	public function isDown()
 	{
 		if ($this->_currHP == 0)
@@ -165,5 +165,9 @@ class Ship extends Entity
 	public function getDmg()
 	{
 		return $this->_dmg;
+	}
+	public function getDirection()
+	{
+		return $this->_direction;
 	}
 }
