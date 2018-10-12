@@ -15,23 +15,17 @@ class Ship extends Entity
 	private $_baseHP; #health points
 	private $_currHP;
 
-	private $_basePP; #power points
-	private $_currPP;
-
 	private $_baseMP; #movement points
     private $_currMP;
 
-	#Ship = new Ship(array('dmg' => DMG, 'direction' => ORIENTATION, 'name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
 	public function __construct($kwargs)
 	{
 		$this->_dmg = $kwargs['dmg'];
 		$this->_direction = $kwargs['direction'];
 		$this->_name = $kwargs['name'];
-		$this->_size = $kwargs['size'];
         $this->_sprite = $kwargs['sprite'];
 		$this->_baseSP = $kwargs['SP'];
 		$this->_currHP = $this->_baseHP = $kwargs['HP'];
-		$this->_basePP = $kwargs['PP'];
 		$this->_baseMP = $kwargs['MP'];
 	}
 	public function takeDmg($dmg)
@@ -56,18 +50,6 @@ class Ship extends Entity
 	{
 		return (file_get_contents("doc/Ship.doc.txt"));
 	}
-	public function __destruct()
-	{
-
-	}
-
-    /**
-     * @param mixed $player
-     */
-    public function setPlayer($player)
-    {
-        $this->_player = $player;
-    }
 
     /**
      * @return mixed
@@ -83,14 +65,6 @@ class Ship extends Entity
     public function setName($name)
     {
         $this->_name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSize()
-    {
-        return $this->_size;
     }
 
     /**
@@ -131,22 +105,6 @@ class Ship extends Entity
     public function setCurrHP($currHP)
     {
         $this->_currHP = $currHP;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCurrPP()
-    {
-        return $this->_currPP;
-    }
-
-    /**
-     * @param mixed $currPP
-     */
-    public function setCurrPP($currPP)
-    {
-        $this->_currPP = $currPP;
     }
 
     /**
