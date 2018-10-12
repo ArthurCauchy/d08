@@ -21,7 +21,7 @@ class Map {
                 if ($this->_grid[$i][$j] instanceof Asteroid)
                     echo "<td class=\"asteroid\"></td>\n";
                 else if ($this->_grid[$i][$j] instanceof Ship) {
-                    echo "<td style=\"background-image: url('" . $this->_grid[$i][$j]->getSprite()->getIdleSprite() . "'); background-size:cover;border:0 none;\"></td>\n";
+                    echo "<td style=\"background-image: url('" . $this->_grid[$i][$j]->getSprite()->getIdleSprite() . "'); background-size:cover;\"></td>\n";
                 }
 				else if ($this->_grid[$i][$j] == "shot")
 					echo "<td class=\"shot\"></td>\n";
