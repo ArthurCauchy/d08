@@ -24,7 +24,7 @@ class Ship extends Entity
 		$this->_direction = $kwargs['direction'];
 		$this->_name = $kwargs['name'];
         $this->_sprite = $kwargs['sprite'];
-		$this->_baseSP = $kwargs['SP'];
+		$this->_currSP = $this->_baseSP = $kwargs['SP'];
 		$this->_currHP = $this->_baseHP = $kwargs['HP'];
 		$this->_baseMP = $kwargs['MP'];
 	}
