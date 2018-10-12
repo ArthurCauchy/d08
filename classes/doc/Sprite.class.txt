@@ -1,0 +1,20 @@
+
+<- Sprite ----------------------------------------------------------------------
+
+This class represents the sprite of a ship.
+
+============ CONSTRUCTION ============
+
+$sprite = new Sprite($imgs);
+
+- $imgs => array containing url to the images of the sprite, from top left to bottom right
+
+=========== Public Methods ===========
+
+Static :
+- String doc(); => returns this documentation
+
+Non-static :
+- string getIdleSprite() => returns url to the next image of this sprite (1st call: (0,0) img, 2nd call : (1,0) img, etc.. it loops)
+
+---------------------------------------------------------------------- Sprite ->
