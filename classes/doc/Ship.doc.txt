@@ -8,7 +8,13 @@ This class represents a Ship. It extends Entity class.
 $vector = new Vector($array);
 
 $array must define the keys :
-- "attr" => description
+- "dmg" => potential damages of this ship (int)
+- "direction" => in which direction the ship is looking (string)
+- "name" => the name of the ship, must be epic (string)
+- "sprite" => sprite of the ship (array of strings, path of images)
+- "SP" => base shield points (int)
+- "HP" => base health points (int)
+- "MP" => base movement points (int)
 
 =========== Public Methods ===========
 
@@ -16,11 +22,21 @@ Static :
 - String doc(); => returns this documentation
 
 Non-static :
--
+- bool isDown() => is the ship destroyed yet ?
+- void addSP($amount) => add $amount shield points
+- void takeDmg($amount) => inflicts $amount damage to this ship
+- void useMp($amount) => register the use of $amount movement points
+- void resetMp() => reset the movement points
 
 ========= Getters and Setters ========
 
 Getters :
-- type getMachin();
+- string getName();
+- Sprite getSprite();
+- int getCurrSP();
+- int getCurrHP();
+- int getCurrMP();
+- int getDmg();
+- string getDirection();
 
 ---------------------------------------------------------------------- Ship ->

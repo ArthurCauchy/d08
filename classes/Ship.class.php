@@ -38,13 +38,6 @@ class Ship extends Entity
         return $this->_name;
     }
 
-    public function isDown() {
-        if ($this->_currHP == 0)
-            return TRUE;
-        else
-            return FALSE;
-    }
-
     public function getSprite() {
         return $this->_sprite;
     }
@@ -53,12 +46,27 @@ class Ship extends Entity
         return $this->_currSP;
     }
 
-    public function addSP($value) {
-        $this->_currSP += $value;
-    }
-
     public function getCurrHP() {
         return $this->_currHP;
+    }
+
+    public function getDmg() {
+        return $this->_dmg;
+    }
+
+    public function getDirection() {
+        return $this->_direction;
+    }
+
+    public function isDown() {
+        if ($this->_currHP == 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    public function addSP($value) {
+        $this->_currSP += $value;
     }
 
     public function takeDmg($dmg) {
@@ -83,12 +91,4 @@ class Ship extends Entity
     public function resetMP() {
         $this->_currMP = $this->_baseMP;
     }
-
-	public function getDmg() {
-		return $this->_dmg;
-	}
-
-	public function getDirection() {
-		return $this->_direction;
-	}
 }
