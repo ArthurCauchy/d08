@@ -8,14 +8,13 @@ function init() {
     $data['player2'] = new Player(['name'=>'Le Mechant']);
 
     // Set Entity
-    $asteroid = new Asteroid();
     $ship1 = new Ship(array('name' => "First star", 'size' => NULL, 'SP' => 0, 'HP' => 10, 'PP' => 10, 'MP' => 15));
     $ship2 = new Ship(array('name' => "Evil star", 'size' => NULL, 'SP' => 0, 'HP' => 15, 'PP' => 10, 'MP' => 15));
 
     // Set Entity position;
     $data['map']->placeEntity(1, 0, 0, 0, $ship1);
-    $data['map']->placeEntity(74, 49, 72, 48, $ship2);
-    $data['map']->placeEntity(10, 15, 8, 13, $asteroid);
+    $data['map']->placeEntity(74, 49, 71, 48, $ship2);
+    $data['map']->placeEntity(10, 15, 8, 13, new Asteroid());
     $data['map']->placeEntity(35, 18, 25, 8, new Asteroid());
 
     //Add spaceship to player 1

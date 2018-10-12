@@ -1,6 +1,3 @@
 <?php
-class Entity
-{
-
+abstract class Entity {
 }
-?>
