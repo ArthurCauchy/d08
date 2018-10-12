@@ -48,7 +48,7 @@ class Ship extends Entity
 	}
 	public function addSP($value)
 	{
-		$this->_currSP = $this->_currSP + $value;
+		$this->_currSP += $value;
 	}
 	public function doc()
 	{

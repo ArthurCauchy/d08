@@ -23,8 +23,8 @@ class Map {
                 else if ($this->_grid[$i][$j] instanceof Ship) {
                     echo "<td style=\"background-image: url('" . $this->_grid[$i][$j]->getSprite()->getIdleSprite() . "'); background-size:cover;\"></td>\n";
                 }
-				else if ($this->_grid[$i][$j] == "shot")
-					echo "<td class=\"shot\"></td>\n";
+				else if ($this->_grid[$i][$j] instanceof Missile)
+					echo "<td class=\"missile\"></td>\n";
                 else
                     echo "<td></td>\n";
             }
@@ -48,9 +48,10 @@ class Map {
 		return 0;
 	}
 
-    public function shoot($ship)
+    public function registerMissile($ship)
     {
-        $direction = $ship->getDirection(); //set direction;
+        $missile = new Missile();
+        $direction = $ship->getDirection(); // TODO set direction;
         $i = 0;
         $j = 0;
         while ($i <= $this->_ySize)
@@ -66,10 +67,10 @@ class Map {
 							$out--;
 						for ($j2 = $out; $j2 >= 0; $j2--)
 						{
-							if ($this->getEntityAt($j2, $i) && $this->getEntityAt($j2, $i) != "shot")
+							if ($this->getEntityAt($j2, $i) && $this->getEntityAt($j2, $i) != $missile)
 								return $this->_shootElem($j2, $i, $ship);
 							else
-								$this->setEntityAt($j2, $i, "shot");
+								$this->setEntityAt($j2, $i, $missile);
 						}
 						return;
 					}
@@ -80,10 +81,10 @@ class Map {
 							$out++;
 						for ($j2 = $out; $j2 <= $this->_xSize; $j2++)
 						{
-							if ($this->getEntityAt($j2, $i) && $this->getEntityAt($j2, $i) != "shot")
+							if ($this->getEntityAt($j2, $i) && $this->getEntityAt($j2, $i) != $missile)
 								return $this->_shootElem($j2, $i, $ship);
 							else
-								$this->setEntityAt($j2, $i, "shot");
+								$this->setEntityAt($j2, $i, $missile);
 						}
 						return 0;
 					}
@@ -114,6 +115,15 @@ class Map {
         for ($i = 0; $i < $this->_ySize; $i++) {
             for ($j = 0; $j < $this->_xSize; $j++) {
                 if ($this->_grid[$i][$j] === $entity)
+                    $this->_grid[$i][$j] = NULL;
+            }
+        }
+    }
+
+    public function clearMissiles() {
+        for ($i = 0; $i < $this->_ySize; $i++) {
+            for ($j = 0; $j < $this->_xSize; $j++) {
+                if ($this->_grid[$i][$j] instanceof Missile)
                     $this->_grid[$i][$j] = NULL;
             }
         }

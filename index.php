@@ -6,6 +6,7 @@ require_once('classes/Map.class.php');
 require_once('classes/Sprite.class.php');
 require_once('classes/Ship.class.php');
 require_once('classes/Asteroid.class.php');
+require_once('classes/Missile.class.php');
 require_once('classes/Player.class.php');
 require_once('init.php');
 
@@ -22,10 +23,11 @@ if (isset($_GET["destroy"])) {
 }
 
 if (isset($_GET["move"])) {
+    $data['map']->clearMissiles();
     if ($data['turn']['player']->getUnits()[0]->getCurrMp() > 0) {
         $ret = $data['map']->moveEntity($data['turn']['player']->getUnits()[0], $_GET["move"]);
         $data['turn']['player']->getUnits()[0]->useMp(1);
-        if ($ret instanceof Entity) {
+        if ($ret === FALSE || $ret instanceof Entity) {
             $ship = $data['turn']['player']->getUnits()[0];
             $data['turn']['player']->removeUnit($ship);
             $data['map']->removeEntity($ship);
@@ -37,12 +39,13 @@ if (isset($_GET["move"])) {
     }
 }
 
-else if (isset($_GET["shoot"])) {
+if (isset($_GET["fire"])) {
+    $data['map']->clearMissiles();
 	if ($data['turn']['player']->getName() === "Player 1 - Le Hero")
 		$ennemy = 'player2';
 	else
 		$ennemy = 'player1';
-    if (($ret = ($data['map']->shoot($data['turn']['player']->getUnits()[0]))) != 0)
+    if (($ret = ($data['map']->registerMissile($data['turn']['player']->getUnits()[0]))) != 0)
 		$data[$ennemy]->removeUnit($ret);
 	if ($data[$ennemy]->hasLost() == TRUE)
 	{
@@ -51,10 +54,10 @@ else if (isset($_GET["shoot"])) {
     header('Location: index.php?endTurn=yes');
 }
 
-else if (isset($_GET["shield"])) {
+if (isset($_GET["shield"])) {
+    $data['map']->clearMissiles();
 	$data['turn']['player']->getUnits()[0]->addSP(5);
     header('Location: index.php?endTurn=yes');
-    exit;
 }
 
 if (isset($_GET["endTurn"])) {
@@ -65,7 +68,7 @@ if (isset($_GET["endTurn"])) {
 	$data['turn']['player']->getUnits()[0]->resetMP();
 }
 
-else if (isset($_GET["endPhase"]) && $data['turn']['phase'] === 'movement')
+if (isset($_GET["endPhase"]) && $data['turn']['phase'] === 'movement')
 	$data['turn']['phase'] = 'action';
 
 $_SESSION['data'] = serialize($data);
@@ -110,7 +113,7 @@ $_SESSION['data'] = serialize($data);
 		}
 		else {
 			echo "<a href=\"index.php?shield=yes\"><button>SHIELD</button></a>\n";
-			echo "<a href=\"index.php?shoot=yes\"><button>SHOOT</button></a>\n";
+			echo "<a href=\"index.php?fire=yes\"><button>FIRE</button></a>\n";
 			echo "<a href=\"index.php?endTurn=yes\"><button>END TURN</button></a>\n";
 		}
 	?>
