@@ -4,8 +4,8 @@ function init() {
     global $data;
     //Init session
     $data['map'] = new Map(array ('x' => 75, 'y' => 50));
-    $data['player1'] = new Player(['name'=>'Le Hero']);
-    $data['player2'] = new Player(['name'=>'Le Mechant']);
+    $data['player1'] = new Player(['name'=>'Player 1 - Le Hero']);
+    $data['player2'] = new Player(['name'=>'Player 2 - Le Mechant']);
 
     // Load basic sprite
     $sprite_blue = new Sprite(["img/ships/blue/00.png", "img/ships/blue/10.png", "img/ships/blue/20.png", "img/ships/blue/30.png", "img/ships/blue/40.png", "img/ships/blue/50.png",
@@ -42,5 +42,5 @@ function init() {
     $data['player2']->addUnit($ship2);
 
 	//Set Current Turn
-	$data['turn'] = $data['player1'];
+	$data['turn'] = ['player' => $data['player1'], 'phase' => 'movement'];
 }
