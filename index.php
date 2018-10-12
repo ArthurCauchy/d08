@@ -26,6 +26,12 @@ if (isset($_GET["move"]))
 
 else if (isset($_GET["shoot"])) {
     $data['map']->shoot($data['turn']['player']->getUnits()[0]);
+	header('Location: index.php?endTurn=yes');
+}
+
+else if (isset($_GET["shield"])) {
+	$data['turn']['player']->getUnits()[0]->setCurrSP($data['turn']['player']->getUnits()[0]->getCurrSP + 5);
+	header('Location: index.php?endTurn=yes');
 }
 
 else if (isset($_GET["unshoot"])) {
@@ -40,7 +46,7 @@ else if (isset($_GET["endTurn"])) {
 }
 
 else if (isset($_GET["endPhase"]) && $data['turn']['phase'] === 'movement')
-	$data['turn']['phase'] = 'attack';
+	$data['turn']['phase'] = 'action';
 
 $_SESSION['data'] = serialize($data);
 
@@ -64,6 +70,7 @@ $_SESSION['data'] = serialize($data);
 			echo "<a href=\"index.php?endPhase=yes\"><button>END PHASE</button></a>\n";
 		}
 		else {
+			echo "<a href=\"index.php?shield=yes\"><button>SHIELD</button></a>\n";
 			echo "<a href=\"index.php?shoot=yes\"><button>SHOOT</button></a>\n";
 			echo "<a href=\"index.php?endTurn=yes\"><button>END TURN</button></a>\n";
 		}

@@ -14,8 +14,8 @@ function init() {
         "img/ships/red/01.png", "img/ships/red/11.png", "img/ships/red/21.png", "img/ships/red/31.png", "img/ships/red/41.png", "img/ships/red/51.png"]);
 
     // Set Entity
-    $ship1 = new Ship(array('dmg' => 5, 'direction' => "right", 'name' => "First star", 'sprite' => $sprite_blue, 'SP' => 0, 'HP' => 10, 'MP' => 8));
-    $ship2 = new Ship(array('dmg' => 5, 'direction' => "left", 'name' => "Evil star", 'sprite' => $sprite_red, 'SP' => 0, 'HP' => 10, 'MP' => 8));
+    $ship1 = new Ship(array('dmg' => 5, 'direction' => "right", 'name' => "First star", 'sprite' => $sprite_blue, 'SP' => 5, 'HP' => 10, 'MP' => 8));
+    $ship2 = new Ship(array('dmg' => 5, 'direction' => "left", 'name' => "Evil star", 'sprite' => $sprite_red, 'SP' => 5, 'HP' => 10, 'MP' => 8));
 
     // Set Entity position;
     $data['map']->placeEntity(5, 49, 0, 48, $ship1);
