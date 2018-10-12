@@ -2,6 +2,9 @@
 require_once('Entity.class.php');
 class Ship extends Entity
 {
+	private $_dmg; #to set in construct
+	private $_direction; #to set in construct
+
 	private $_name; #ship name
 	private $_size; #ship size [x, y]
 	private $_sprite; #link to sprite
@@ -21,6 +24,7 @@ class Ship extends Entity
 	#Ship = new Ship(array('name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
 	public function __construct($kwargs)
 	{
+		$this->_dmg = 8;
 		$this->_name = $kwargs['name'];
 		$this->_size = $kwargs['size'];
 		$this->_baseSP = $kwargs['SP'];
@@ -53,7 +57,7 @@ class Ship extends Entity
 	}
 	public function __destruct()
 	{
-	
+
 	}
     /**
      * @param mixed $player
@@ -158,4 +162,8 @@ class Ship extends Entity
     {
         $this->_currMP = $currMP;
     }
+	public function getDmg()
+	{
+		return $this->_dmg;
+	}
 }

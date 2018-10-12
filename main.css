@@ -40,6 +40,10 @@ section table td {
 	background-size: auto;
 }
 
+.shot {
+	background-color: rgb(0, 255, 0);
+}
+
 .team1 {
 	background-color: blue;
 }

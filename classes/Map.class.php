@@ -26,6 +26,8 @@ class Map {
                     else
                         echo "<td class=\"team2\"></td>\n";
                 }
+				else if ($this->_grid[$i][$j] == "shot")
+					echo "<td class=\"shot\"></td>\n";
                 else
                     echo "<td></td>\n";
             }
@@ -33,7 +35,42 @@ class Map {
         }
         echo "</table>\n";
     }
-
+	public function unshoot()
+    {
+        $this->setEntityAt(5, 5, NULL);
+    }
+    public function shoot($ship)
+    {
+        $direction = "left"; //set direction;
+        $i = 0;
+        $j = 0;
+        while ($i <= $this->_ySize)
+        {
+            while ($j <= $this->_xSize)
+            {
+                if ($this->_grid[$i][$j] == $ship)
+                {
+					$out = $j;
+					while ($this->_grid[$i][$out] == $ship)
+					{
+						$out--;
+					}
+					for ($j2 = $out; $j2 >= 0; $j2--)
+					{
+						#echo "setting" . $i2 . "," . $j;
+						if ($this->getEntityAt($j2, $i))
+							return ;
+						else
+							$this->setEntityAt($j2, $i, "shot");
+					}
+					return;
+				}
+                $j++;
+            }
+            $j = 0;
+            $i++;
+        }
+    }
     public function getEntityAt($x, $y) {
         return ($this->_grid[$y][$x]);
     }

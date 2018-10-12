@@ -22,6 +22,13 @@ if (isset($_GET["destroy"])) {
     header('Location: index.php');
     exit;
 }
+if (isset($_GET["shoot"])) {
+    $data['map']->shoot($data['player2']->getUnits()[0]);
+}
+
+if (isset($_GET["unshoot"])) {
+    $data['map']->unshoot();
+}
 
 $_SESSION['data'] = serialize($data);
 
@@ -38,6 +45,7 @@ $_SESSION['data'] = serialize($data);
     <a href="index.php?move=right"><button>MOVE RIGHT</button></a>
     <a href="index.php?move=up"><button>MOVE UP</button></a>
     <a href="index.php?move=down"><button>MOVE DOWN</button></a>
+	<a href="index.php?shoot=yes"><button>SHOOT</button></a>
     <a href="index.php?destroy=yes"><button>RESTART GAME</button></a>
 </header>
 <section>
