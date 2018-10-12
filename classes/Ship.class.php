@@ -46,6 +46,10 @@ class Ship extends Entity
 		else
 			return FALSE;
 	}
+	public function addShield($value)
+	{
+		$this->_currSP = $this->_currSP + $value;
+	}
 	public function doc()
 	{
 		return (file_get_contents("doc/Ship.doc.txt"));

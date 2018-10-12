@@ -25,8 +25,19 @@ if (isset($_GET["move"]))
     $data['map']->moveEntity($data['turn']['player']->getUnits()[0],  $_GET["move"]);
 
 else if (isset($_GET["shoot"])) {
-    $data['map']->shoot($data['turn']['player']->getUnits()[0]);
-	header('Location: index.php?endTurn=yes');
+	if ($data['turn']['player']->getName() === "Player 1 - Le Hero")
+		$ennemy = 'player2';
+	else
+		$ennemy = 'player1';
+    if (($ret = ($data['map']->shoot($data['turn']['player']->getUnits()[0]))) != 0)
+	{
+		$data[$ennemy]->removeUnit($ret);
+	}
+
+	if ($data[$ennemy]->hasLost() == TRUE)
+	{
+		header('Location: index.php?destroy=yes');
+	}
 }
 
 else if (isset($_GET["shield"])) {

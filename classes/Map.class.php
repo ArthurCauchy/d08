@@ -45,9 +45,12 @@ class Map {
 		{
 			$elem->takeDmg($ship->getDmg());
 			if ($elem->isDown() == TRUE)
+			{
 				$this->removeEntity($elem);
+				return $elem;
+			}
 		}
-		return 1;
+		return 0;
 	}
 
     public function shoot($ship)
@@ -87,7 +90,7 @@ class Map {
 							else
 								$this->setEntityAt($j2, $i, "shot");
 						}
-						return;
+						return 0;
 					}
 				}
                 $j++;
