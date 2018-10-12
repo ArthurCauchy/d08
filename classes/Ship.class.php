@@ -46,7 +46,7 @@ class Ship extends Entity
 		else
 			return FALSE;
 	}
-	public function addShield($value)
+	public function addSP($value)
 	{
 		$this->_currSP = $this->_currSP + $value;
 	}
