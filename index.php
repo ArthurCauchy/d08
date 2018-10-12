@@ -50,6 +50,7 @@ if (isset($_GET["fire"])) {
 	if ($data[$ennemy]->hasLost() == TRUE)
 	{
 		header('Location: index.php?destroy=yes');
+		exit;
 	}
     header('Location: index.php?endTurn=yes');
 }
@@ -96,11 +97,11 @@ $_SESSION['data'] = serialize($data);
     <div style="width:100%; float:left">
         <div style="width:50%; display:inline-block;">
             <h3><?php echo $data['player1']->getName(); ?></h3>
-            <h3><span class="health">Heath : <?php echo $data['player1']->getUnits()[0]->getCurrHP(); ?></span> | <span class="shield">Shield : <?php echo $data['player1']->getUnits()[0]->getCurrSP(); ?></span></h3>
+            <h3><span class="health">Health : <?php echo $data['player1']->getUnits()[0]->getCurrHP(); ?></span> | <span class="shield">Shield : <?php echo $data['player1']->getUnits()[0]->getCurrSP(); ?></span></h3>
         </div>
         <div style="width:50%; float:right">
             <h3><?php echo $data['player2']->getName(); ?></h3>
-            <h3><span class="health">Heath : <?php echo $data['player2']->getUnits()[0]->getCurrHP(); ?></span> | <span class="shield">Shield : <?php echo$data['player2']->getUnits()[0]->getCurrSP(); ?></span></h3>
+            <h3><span class="health">Health : <?php echo $data['player2']->getUnits()[0]->getCurrHP(); ?></span> | <span class="shield">Shield : <?php echo$data['player2']->getUnits()[0]->getCurrSP(); ?></span></h3>
         </div>
     </div>
 	<?php
