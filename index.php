@@ -47,14 +47,12 @@ else if (isset($_GET["shoot"])) {
 	if ($data[$ennemy]->hasLost() == TRUE)
 	{
 		header('Location: index.php?destroy=yes');
-		exit;
 	}
     header('Location: index.php?endTurn=yes');
-    exit;
 }
 
 else if (isset($_GET["shield"])) {
-	$data['turn']['player']->getUnits()[0]->setCurrSP($data['turn']['player']->getUnits()[0]->getCurrSP + 5);
+	$data['turn']['player']->getUnits()[0]->addSP(5);
     header('Location: index.php?endTurn=yes');
     exit;
 }
@@ -64,6 +62,7 @@ if (isset($_GET["endTurn"])) {
         $data['turn'] = ['player' => $data['player2'], 'phase' => 'movement'];
     else
         $data['turn'] = ['player' => $data['player1'], 'phase' => 'movement'];
+	$data['turn']['player']->getUnits()[0]->resetMP();
 }
 
 else if (isset($_GET["endPhase"]) && $data['turn']['phase'] === 'movement')
@@ -84,8 +83,11 @@ $_SESSION['data'] = serialize($data);
     <?php
 
     if ($data['turn']['phase'] === "movement")
+	{
+#		$data['turn']['player']->getUnits()[0]->resetMP();
         echo "<h2>Movement phase - <span class=\"movement\">" . $data['turn']['player']->getUnits()[0]->getCurrMP() . " MP</span></h2>\n";
-    else if ($data['turn']['phase'] === "action")
+	}
+	else if ($data['turn']['phase'] === "action")
         echo "<h2>Action phase</h2>\n";
     ?>
     <div style="width:100%; float:left">
