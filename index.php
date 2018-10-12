@@ -43,20 +43,20 @@ else if (isset($_GET["shoot"])) {
 	else
 		$ennemy = 'player1';
     if (($ret = ($data['map']->shoot($data['turn']['player']->getUnits()[0]))) != 0)
-	{
 		$data[$ennemy]->removeUnit($ret);
-	}
-
 	if ($data[$ennemy]->hasLost() == TRUE)
 	{
 		header('Location: index.php?destroy=yes');
 		exit;
 	}
+    header('Location: index.php?endTurn=yes');
+    exit;
 }
 
 else if (isset($_GET["shield"])) {
 	$data['turn']['player']->getUnits()[0]->setCurrSP($data['turn']['player']->getUnits()[0]->getCurrSP + 5);
-
+    header('Location: index.php?endTurn=yes');
+    exit;
 }
 
 if (isset($_GET["endTurn"])) {
