@@ -1,0 +1,35 @@
+
+<- Map ----------------------------------------------------------------------
+
+This class represents the Map on which the battle occurs.
+
+============ CONSTRUCTION ============
+
+$map = new Map($array);
+
+$array must define the keys :
+- "x" => represents the x size of the map (int)
+- "y" => represents the y size of the map (int)
+
+=========== Public Methods ===========
+
+Static :
+- String doc(); => returns this documentation
+
+Non-static :
+- void draw() => prints the map
+- void registerMissile($ship) => register a missile on the map grid
+- void placeEntity($x1, $y1, $x2, $y2, $entity) => place an entity on the map
+- void removeEntity($entity) => remove $entity from the map grid
+- void clearMissiles() => remove every missile from the map
+- void moveEntity($entity, $direction) => move $entity one step to $direction
+
+========= Getters and Setters ========
+
+Getters :
+- Entity getEntityAt($x, $y);
+
+Setters :
+- setEntityAt($x, $y, $entity);
+
+---------------------------------------------------------------------- Map ->
