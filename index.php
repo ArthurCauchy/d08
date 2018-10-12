@@ -72,6 +72,7 @@ $_SESSION['data'] = serialize($data);
 <header>
 	<h1><?php echo $data['turn']['player']->getName(); ?></h1>
 	<h2><?php echo ucfirst($data['turn']['phase']); ?> Phase</h2>
+    <h3><span class=".health">Heath : <?php echo $data['turn']['player']->getUnits()[0]->getCurrHP(); ?> | </span><span class=".shield">Shield <?php echo $data['turn']['player']->getUnits()[0]->getCurrSP(); ?></span><span class=""></span></h3>
 	<?php
 		if ($data['turn']['phase'] === "movement") {
 			echo "<a href=\"index.php?move=left\"><button>MOVE LEFT</button></a>\n";

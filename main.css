@@ -13,13 +13,6 @@ header {
 	text-align: center;
 	border-bottom: 1px solid white;
 	padding: 10px;
-}
-
-header h1 {
-	color: white;
-}
-
-header h2 {
 	color: white;
 }
 
@@ -51,4 +44,12 @@ section table td {
 .shot {
 	background-image: url('img/laser.png');
 	background-size: cover;
+}
+
+.health {
+	background-color: red;
+}
+
+.shield {
+	background-color: blue;
 }
