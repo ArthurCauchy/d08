@@ -19,7 +19,7 @@ class Ship extends Entity
 	private $_currPP;
 
 	private $_baseMP; #movement points
-	private $_currMP;
+    private $_currMP;
 
 	#Ship = new Ship(array('dmg' => DMG, 'direction' => ORIENTATION, 'name' => NAME, 'size' => array('x' => 1, 'y' => 2), 'SP' => 200, 'HP' => 200, 'PP' => 200, 'MP' => 3));
 	public function __construct($kwargs)
@@ -28,6 +28,7 @@ class Ship extends Entity
 		$this->_direction = $kwargs['direction'];
 		$this->_name = $kwargs['name'];
 		$this->_size = $kwargs['size'];
+        $this->_sprite = $kwargs['sprite'];
 		$this->_baseSP = $kwargs['SP'];
 		$this->_currHP = $this->_baseHP = $kwargs['HP'];
 		$this->_basePP = $kwargs['PP'];
@@ -59,6 +60,7 @@ class Ship extends Entity
 	{
 
 	}
+
     /**
      * @param mixed $player
      */
@@ -92,11 +94,11 @@ class Ship extends Entity
     }
 
     /**
-     * @param mixed $size
+     * @return mixed
      */
-    public function setSize($size)
+    public function getSprite()
     {
-        $this->_size = $size;
+        return $this->_sprite;
     }
 
     /**

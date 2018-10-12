@@ -1,20 +1,18 @@
 <?php
 class Sprite {
     private $_imgs;
-    private $_xSize;
-    private $_ySize;
+    private $_count;
 
-    public function __construct($xSize, $ySize, $imgs) {
-        $this->_xSize = $xSize;
-        $this->_ySize = $ySize;
+    public function __construct($imgs) {
         $this->_imgs = $imgs;
+        $this->_count = 0;
     }
 
-    public function getIdleSprite($x, $y) {
-        for ($i = 0; $i < $y; $i++) {
-            for ($j = 0; $j < $x; $j++) {
-                return ($this->_imgs[$x + $y * $this->_ySize]);
-            }
-        }
+    public function getIdleSprite() {
+        $ret = $this->_imgs[$this->_count];
+        $this->_count++;
+        if (!isset($this->_imgs[$this->_count]))
+            $this->_count = 0;
+        return ($ret);
     }
 }

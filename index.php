@@ -3,6 +3,7 @@
 session_start();
 
 require_once('classes/Map.class.php');
+require_once('classes/Sprite.class.php');
 require_once('classes/Ship.class.php');
 require_once('classes/Asteroid.class.php');
 require_once('classes/Player.class.php');
@@ -49,7 +50,7 @@ $_SESSION['data'] = serialize($data);
     <a href="index.php?destroy=yes"><button>RESTART GAME</button></a>
 </header>
 <section>
-    <?php $data['map']->draw([$data['player1'], $data['player2']]); ?>
+    <?php $data['map']->draw(); ?>
 </section>
 </body>
 </html>

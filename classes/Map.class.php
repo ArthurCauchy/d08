@@ -13,7 +13,7 @@ class Map {
         $this->_ySize = $kwargs["y"];
     }
 
-    public function draw($players) {
+    public function draw() {
         echo "<table>\n";
         for ($i = 0; $i < $this->_ySize; $i++) {
             echo "<tr>\n";
@@ -21,10 +21,7 @@ class Map {
                 if ($this->_grid[$i][$j] instanceof Asteroid)
                     echo "<td class=\"asteroid\"></td>\n";
                 else if ($this->_grid[$i][$j] instanceof Ship) {
-                    if (in_array($this->_grid[$i][$j], $players[0]->getUnits())) // TODO foreach on player then get the color directly from the Player instance
-                        echo "<td class=\"team1\"></td>\n";
-                    else
-                        echo "<td class=\"team2\"></td>\n";
+                    echo "<td style=\"background-image: url('" . $this->_grid[$i][$j]->getSprite()->getIdleSprite() . "'); background-size:cover;border:0 none;\"></td>\n";
                 }
 				else if ($this->_grid[$i][$j] == "shot")
 					echo "<td class=\"shot\"></td>\n";
@@ -35,6 +32,7 @@ class Map {
         }
         echo "</table>\n";
     }
+
 	public function unshoot()
     {
         $this->setEntityAt(5, 5, NULL);
