@@ -22,4 +22,7 @@ function init() {
 
     //Add spaceship to player 2
     $data['player2']->addUnit($ship2);
+
+	//Set Current Turn
+	$data['turn'] = $data['player1'];
 }
