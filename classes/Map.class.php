@@ -33,11 +33,6 @@ class Map {
         echo "</table>\n";
     }
 
-	public function unshoot()
-    {
-        $this->setEntityAt(5, 5, NULL);
-    }
-
 	private function _shootElem($x, $y, $ship)
 	{
 		$elem = $this->getEntityAt($x, $y);

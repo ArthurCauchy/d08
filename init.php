@@ -20,7 +20,6 @@ function init() {
     // Set Entity position;
     $data['map']->placeEntity(5, 49, 0, 48, $ship1);
     $data['map']->placeEntity(74, 49, 69, 48, $ship2);
-	$number = 2;
 	$number = rand(10, 15);
 	while ($number)
 	{

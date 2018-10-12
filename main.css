@@ -47,9 +47,13 @@ section table td {
 }
 
 .health {
-	background-color: red;
+	color: #ff475d;
 }
 
 .shield {
-	background-color: blue;
+	color: #31d1ff;
+}
+
+.movement {
+	color: #22bf5f;
 }

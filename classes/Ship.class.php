@@ -26,7 +26,7 @@ class Ship extends Entity
         $this->_sprite = $kwargs['sprite'];
 		$this->_currSP = $this->_baseSP = $kwargs['SP'];
 		$this->_currHP = $this->_baseHP = $kwargs['HP'];
-		$this->_baseMP = $kwargs['MP'];
+        $this->_currMP = $this->_baseMP = $kwargs['MP'];
 	}
 	public function takeDmg($dmg)
 	{
@@ -99,33 +99,26 @@ class Ship extends Entity
         return $this->_currHP;
     }
 
-    /**
-     * @param mixed $currHP
-     */
-    public function setCurrHP($currHP)
+    public function useMp($amount)
     {
-        $this->_currHP = $currHP;
+        $this->_currMP -= $amount;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCurrMP()
     {
         return $this->_currMP;
     }
 
-    /**
-     * @param mixed $currMP
-     */
-    public function setCurrMP($currMP)
+    public function resetMP()
     {
-        $this->_currMP = $currMP;
+        $this->_currMP = $this->_baseMP;
     }
+
 	public function getDmg()
 	{
 		return $this->_dmg;
 	}
+
 	public function getDirection()
 	{
 		return $this->_direction;

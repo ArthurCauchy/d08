@@ -21,28 +21,34 @@ if (isset($_GET["destroy"])) {
     exit;
 }
 
-if (isset($_GET["move"]))
-    $data['map']->moveEntity($data['turn']['player']->getUnits()[0],  $_GET["move"]);
+if (isset($_GET["move"])) {
+    if ($data['turn']['player']->getUnits()[0]->getCurrMp() > 0) {
+        $ret = $data['map']->moveEntity($data['turn']['player']->getUnits()[0], $_GET["move"]);
+        $data['turn']['player']->getUnits()[0]->useMp(1);
+        if ($ret instanceof Entity) {
+            $ship = $data['turn']['player']->getUnits()[0];
+            $data['turn']['player']->removeUnit($ship);
+            $data['map']->removeEntity($ship);
+            if ($data['turn']['player']->hasLost())
+                header('Location: index.php?destroy=yes');
+        }
+    }
+}
 
 else if (isset($_GET["shoot"])) {
     $data['map']->shoot($data['turn']['player']->getUnits()[0]);
-	header('Location: index.php?endTurn=yes');
 }
 
 else if (isset($_GET["shield"])) {
 	$data['turn']['player']->getUnits()[0]->setCurrSP($data['turn']['player']->getUnits()[0]->getCurrSP + 5);
-	header('Location: index.php?endTurn=yes');
+
 }
 
-else if (isset($_GET["unshoot"])) {
-    $data['map']->unshoot();
-}
-
-else if (isset($_GET["endTurn"])) {
-	if ($data['turn']['player'] == $data['player1'])
-		$data['turn'] = ['player' => $data['player2'], 'phase' => 'movement'];
-	else
-		$data['turn'] = ['player' => $data['player1'], 'phase' => 'movement'];
+if (isset($_GET["endTurn"])) {
+    if ($data['turn']['player'] == $data['player1'])
+        $data['turn'] = ['player' => $data['player2'], 'phase' => 'movement'];
+    else
+        $data['turn'] = ['player' => $data['player1'], 'phase' => 'movement'];
 }
 
 else if (isset($_GET["endPhase"]) && $data['turn']['phase'] === 'movement')
@@ -60,8 +66,23 @@ $_SESSION['data'] = serialize($data);
 <body>
 <header>
 	<h1><?php echo $data['turn']['player']->getName(); ?></h1>
-	<h2><?php echo ucfirst($data['turn']['phase']); ?> Phase</h2>
-    <h3><span class=".health">Heath : <?php echo $data['turn']['player']->getUnits()[0]->getCurrHP(); ?> | </span><span class=".shield">Shield <?php echo $data['turn']['player']->getUnits()[0]->getCurrSP(); ?></span><span class=""></span></h3>
+    <?php
+
+    if ($data['turn']['phase'] === "movement")
+        echo "<h2>Movement phase - <span class=\"movement\">" . $data['turn']['player']->getUnits()[0]->getCurrMP() . " MP</span></h2>\n";
+    else if ($data['turn']['phase'] === "action")
+        echo "<h2>Action phase</h2>\n";
+    ?>
+    <div style="width:100%; float:left">
+        <div style="width:50%; display:inline-block;">
+            <h3><?php echo $data['player1']->getName(); ?></h3>
+            <h3><span class="health">Heath : <?php echo $data['player2']->getUnits()[0]->getCurrHP(); ?></span> | <span class="shield">Shield : <?php echo $data['turn']['player']->getUnits()[0]->getCurrSP(); ?></span></h3>
+        </div>
+        <div style="width:50%; float:right">
+            <h3><?php echo $data['player2']->getName(); ?></h3>
+            <h3><span class="health">Heath : <?php echo $data['player1']->getUnits()[0]->getCurrHP(); ?></span> | <span class="shield">Shield : <?php echo $data['turn']['player']->getUnits()[0]->getCurrSP(); ?></span></h3>
+        </div>
+    </div>
 	<?php
 		if ($data['turn']['phase'] === "movement") {
 			echo "<a href=\"index.php?move=left\"><button>MOVE LEFT</button></a>\n";
