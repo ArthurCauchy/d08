@@ -47,7 +47,7 @@ class Map {
 		{
 			$elem->takeDmg($ship->getDmg());
 			if ($elem->isDown() == TRUE)
-				echo "DOWN"; //removeEntity($elem);
+				$this->removeEntity($elem);
 		}
 		return 1;
 	}
@@ -110,6 +110,15 @@ class Map {
         for ($i = $y2; $i <= $y1; $i++) {
             for ($j = $x2; $j <= $x1; $j++) {
                 $this->_grid[$i][$j] = $entity;
+            }
+        }
+    }
+
+    public function removeEntity($entity) {
+        for ($i = 0; $i < $this->_ySize; $i++) {
+            for ($j = 0; $j < $this->_xSize; $j++) {
+                if ($this->_grid[$i][$j] === $entity)
+                    $this->_grid[$i][$j] = NULL;
             }
         }
     }
