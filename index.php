@@ -29,14 +29,29 @@ if (isset($_GET["move"])) {
             $ship = $data['turn']['player']->getUnits()[0];
             $data['turn']['player']->removeUnit($ship);
             $data['map']->removeEntity($ship);
-            if ($data['turn']['player']->hasLost())
+            if ($data['turn']['player']->hasLost()) {
                 header('Location: index.php?destroy=yes');
+                exit;
+            }
         }
     }
 }
 
 else if (isset($_GET["shoot"])) {
-    $data['map']->shoot($data['turn']['player']->getUnits()[0]);
+	if ($data['turn']['player']->getName() === "Player 1 - Le Hero")
+		$ennemy = 'player2';
+	else
+		$ennemy = 'player1';
+    if (($ret = ($data['map']->shoot($data['turn']['player']->getUnits()[0]))) != 0)
+	{
+		$data[$ennemy]->removeUnit($ret);
+	}
+
+	if ($data[$ennemy]->hasLost() == TRUE)
+	{
+		header('Location: index.php?destroy=yes');
+		exit;
+	}
 }
 
 else if (isset($_GET["shield"])) {
